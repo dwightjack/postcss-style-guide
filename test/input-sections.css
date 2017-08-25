@@ -1,0 +1,55 @@
+/*
+@styleguide
+@root
+@id index
+@title My Index
+ */
+
+/*
+@styleguide
+@id primary
+@title input sample
+@mymeta test
+
+# h1
+*/
+
+.class {
+  color: blue;
+}
+
+/*
+@doc
+## h2
+*/
+.class {
+  color: red;
+}
+
+/*
+@styleguide
+@root
+@id secondary
+@title Secondary
+
+# h1
+*/
+
+/*
+@styleguide
+@id h3
+@title h3 title
+# h3
+*/
+
+.class {
+    color: blue;
+}
+
+/*
+@doc
+## h4
+*/
+.class {
+    color: red;
+}
