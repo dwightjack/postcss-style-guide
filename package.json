@@ -4,7 +4,8 @@
   "description": "PostCSS plugin to generate a style guide automatically",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tape test/*.js",
+    "lint": "eslint lib index.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,9 @@
     "psg-theme-default": "^1.0.0"
   },
   "devDependencies": {
+    "eslint": "4.5.0",
+    "eslint-config-airbnb-base": "11.3.2",
+    "eslint-plugin-import": "2.7.0",
     "tape": "^4.0.0"
   }
 }
