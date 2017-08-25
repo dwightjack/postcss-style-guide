@@ -10,30 +10,35 @@ var syntaxHighlighter = require('./lib/syntaxHighlight');
 var colorPalette = require('./lib/colorPalette');
 
 module.exports = postcss.plugin('postcss-style-guide', function (opts) {
-    opts = opts || {};
+    opts = opts || {}; //eslint-disable-line no-param-reassign
     analyzer.setModules(opts.syntaxHighlighter || syntaxHighlighter, opts.markdownParser || markdownParser);
-    var func = function (root, result) {
+
+    function func(root, result) {
         var resultOpts = result.opts || {};
+        var params;
+        var maps;
+        var palette;
+        var promise;
         try {
-            var params = newParams(root, opts, resultOpts);
+            params = newParams(root, opts, resultOpts);
         } catch (err) {
             throw err;
         }
-        var maps = analyzer.analyze(root, opts, params);
-        var palette = colorPalette.parse(root.toString());
-        var promise = syntaxHighlighter.execute({
+        maps = analyzer.analyze(root, opts, params);
+        palette = colorPalette.parse(root.toString());
+        promise = syntaxHighlighter.execute({
             src: params.src,
             tmplStyle: params.style,
             stylePath: require.resolve('highlight.js/styles/github.css')
         }).then(function (styles) {
-            maps.forEach((map) => {
+            maps.forEach(function (map) {
                 var html = template.rendering({ root: map, list: maps }, styles, {
                     project: params.project,
                     showCode: params.showCode,
                     tmpl: params.template,
                     colorPalette: (map.id === 'index' ? palette : null)
                 });
-                const dest = path.join(path.dirname(params.dest), `${map.id}.html`);
+                var dest = path.join(path.dirname(params.dest), map.id + '.html');
                 fileWriter.write(dest, html);
 
                 if (!opts.silent) {
@@ -47,7 +52,8 @@ module.exports = postcss.plugin('postcss-style-guide', function (opts) {
             return root;
         });
         return promise;
-    };
+    }
+
     return func;
 });
 
