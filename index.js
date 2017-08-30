@@ -23,7 +23,7 @@ module.exports = postcss.plugin('postcss-style-guide', (opts) => {
         } catch (err) {
             throw err;
         }
-        const sections = analyzer.analyze(root, opts, params);
+        const pages = analyzer.analyze(root, opts, params);
         const palette = colorPalette.parse(root.toString());
 
         return syntaxHighlighter.execute({
@@ -31,14 +31,14 @@ module.exports = postcss.plugin('postcss-style-guide', (opts) => {
             tmplStyle: params.style,
             stylePath: require.resolve('highlight.js/styles/github.css')
         }).then((styles) => {
-            sections.forEach((section) => {
-                const html = render(section, sections, styles, {
+            pages.forEach((page) => {
+                const html = render(page, pages, styles, {
                     project: params.project,
                     showCode: params.showCode,
                     tmpl: params.template,
-                    colorPalette: (section.id === 'index' ? palette : null)
+                    colorPalette: (page.id === 'index' ? palette : null)
                 });
-                const dest = path.join(path.dirname(params.dest), `${section.id}.html`);
+                const dest = path.join(path.dirname(params.dest), `${page.id}.html`);
                 fileWriter.write(dest, html);
 
                 if (!opts.silent) {
