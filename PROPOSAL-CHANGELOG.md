@@ -1,3 +1,7 @@
+## Internals
+
+As PostCSS moved to  node >= 4.0.0, drop v0.12.x support. Codebase refactored to v4 supported ES6 syntax. 
+
 ## Configuration
 
 ### Configurable syntax highlighter
