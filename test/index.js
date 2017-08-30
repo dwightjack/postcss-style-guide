@@ -153,7 +153,7 @@ test('analyzer: analyze root node', (t) => {
 
 test('analyzer: analyze nested root node', (t) => {
     const cwd = process.cwd();
-    const filePath = path.resolve(cwd, 'test/input-sections.css');
+    const filePath = path.resolve(cwd, 'test/input-pages.css');
     const css = fs.readFileSync(filePath, 'utf8');
     const root = postcss.parse(css);
 
