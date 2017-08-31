@@ -81,7 +81,7 @@ test('template: render html', (t) => {
         tmpl: fs.readFileSync(templateFile, 'utf8'),
         params: false
     };
-    const actual = template.rendering([], [], ['', '', ''], params);
+    const actual = template.rendering([], [], [], ['', '', ''], params);
     // FIXME: Generate dynamic code that is not desirable
     const expected = '<!doctype html>\n<html class="psg-theme" lang="en">\n    <head>\n        <meta charset="UTF-8">\n        <title>project</title>\n        <style></style>\n    </head>\n\n    <body>\n      <div class="psg-wrapper">\n        <nav class="psg-menu">\n          <a href="" class="psg-logo">\n            <img\n              title="Philosopher’s stone, logo of PostCSS"\n              src="http://postcss.github.io/postcss/logo-leftp.svg">\n          </a>\n\n          <ul class="psg-ComponentList">\n            \n            \n          </ul>\n\n        </nav>\n\n        <div class="psg-main">\n          <header class="psg-title">\n            <h1>project</h1>\n          </header>\n\n          <div class="psg-container">\n            \n            \n          </div>\n        </div>\n\n      </div>\n\n    </body>\n</html>\n';
     t.plan(1);

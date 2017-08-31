@@ -31,8 +31,9 @@ module.exports = postcss.plugin('postcss-style-guide', (opts) => {
             tmplStyle: params.style,
             stylePath: require.resolve('highlight.js/styles/github.css')
         }).then((styles) => {
+            const maps = pages.reduce((prev, s) => prev.concat(s.nodes), []);
             pages.forEach((page) => {
-                const html = render(page, pages, styles, {
+                const html = render(page, pages, maps, styles, {
                     project: params.project,
                     showCode: params.showCode,
                     tmpl: params.template,
