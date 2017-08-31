@@ -11,7 +11,8 @@ const colorPalette = require('./lib/colorPalette');
 
 module.exports = postcss.plugin('postcss-style-guide', (opts) => {
     opts = opts || {}; //eslint-disable-line no-param-reassign
-    analyzer.setModules(opts.syntaxHighlighter || syntaxHighlighter, opts.markdownParser || markdownParser);
+    const highlighter = opts.syntaxHighlighter || syntaxHighlighter;
+    analyzer.setModules(highlighter, opts.markdownParser || markdownParser);
 
     const render = opts.rendering || template.rendering;
 
@@ -26,7 +27,7 @@ module.exports = postcss.plugin('postcss-style-guide', (opts) => {
         const pages = analyzer.analyze(root, opts, params);
         const palette = colorPalette.parse(root.toString());
 
-        return syntaxHighlighter.execute({
+        return highlighter.execute({
             src: params.src,
             tmplStyle: params.style,
             stylePath: require.resolve('highlight.js/styles/github.css')
